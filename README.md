@@ -27,4 +27,26 @@ Near-memory tries to incorporate memory and computing units on a single IC packa
 I think it is enough for an introduction. Now, we have a basic view of what is happening in this research line. So, we move to the papers published in this area.
 
 ## Research Papers
-[1 - Near-Memory Computing: Past, Present, and Future](papers/01-near_memory_computing.past_present_and_future.md)
+[1 - Near-Memory Computing: Past, Present, and Future (Survey)](papers/01-near_memory_computing.past_present_and_future.md) |  [Paper reference Link]()
+
+[2 - PM: Power Modeling and Power Management for Processing-in-Memory (Modeling)](papers/02-PM.md)
+
+[03 - RC-NVM: Enabling Symmetric Row and Column Memory Accesses for In-Memory Databases (In-Memory Databases)](papers/03-RC-NVM.md)
+
+[04 - RecNMP - Accelerating Personalized Recommendatin with Near-Memory Processing](papers/04-RecNNP.md)
+
+[05 - iPIM: Programmable In-Memory Image Processing Accelerator Using Near-Bank Architecture](papers/05-iPIM.md)
+
+[06 - FloatPIM: In-Memory Acceleration of Deep Neural Network Training with High Precision](papers/06-FloatPIM.md)
+
+[07- Impala: Algorithm/Architecture Co-Design for In-Memory Multi-Stride Pattern Matching](papers/07-Impala.md)
+
+[08 - NAND-Net: Minimizing Computational Complexity of In-Memory Processing for Binary Neural Networks](papers/08-NAND-Net.md)
+
+[09 - PIM-Enabled Instructions: A low-Overhead, locality-Aware Processing-in-Memory Architecture](papers/09-PIM-Enable_Instructions.md)
+
+[10 - Processing-in-Memory Enabled Graphics Processors for 3D Rendering](papers/10-Processing-in-memory_enabled_graphics_for_3D_rendering.md)
+
+[11 - A Scalable Processing-in-Memory Accelerator for Parallel Graph Processing](papers/11-a_scalable_processing_in_memory_accelerator_for_parallel_graph_processing.md)
+
+[12 - PRIME - A Novel Processing-in_Memory Architecture for Neural Network Computation in ReRAM-based Main Memory](PRIME.md)
