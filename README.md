@@ -27,4 +27,4 @@ Near-memory tries to incorporate memory and computing units on a single IC packa
 I think it is enough for an introduction. Now, we have a basic view of what is happening in this research line. So, we move to the papers published in this area.
 
 ## Research Papers
-[Near-Memory Computing: Past, Present, and Future]()
+[1 - Near-Memory Computing: Past, Present, and Future](papers/01-near_memory_computing.past_present_and_future.md)
