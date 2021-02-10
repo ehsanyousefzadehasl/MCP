@@ -44,8 +44,33 @@ First Near-Memory computing system was developed in 1990: Vector IRAM (VIRAM), a
 
 - Data Mapping
 
-
 ## Design Space Exploration for Near-Memory Computation
-
+- Application Characterization -  knowing more about the application is crucial in adopting NMC to accelerate it
+- Performance Evaluation Techniques
+  - Analytic Models
+  - Simulation-based Models: In the following list, simulators are listed
+1. [Sinuca 2015](https://github.com/mazalves/sinuca)
+2. [HMC-SIM 2016](https://github.com/tactcomplabs/gc64-hmcsim)
+3. [CasHMC 2016](https://github.com/estwings57/CasHMC)
+4. [SMC 2017](https://github.com/jiwon-choe/Brown-SMCSim)
+5. CLAPPS 2017
+6. [Ramulator-PIM 2019](https://github.com/CMU-SAFARI/ramulator-pim)
 
 ## Practicalities of Near-Memory Computation
+Finally, the authors of the survey focus on their work to explain how they meet the challenges related to NMC. 
+
+They depict their proposed system with NMC capability with an abstract view of application code with kernels that are offloaded to NMC as follows.
+- For the 3D stacked memroy, they consider a 4GB HMC like design, with 8 DRAM layers, which each DRAM layer is split into 16 dual banked partitions with four vertical partitions forming a vault. Each vault has its vault controller.
+
+![with NMC capability](../img/overview_of_the_system_with_NMC_capability.png)
+
+Then, they characterize the application with the following metrics to detect the kernels that their offload to the NMC subsystem can result in performance improvement.
+
+- **Memory Entropy**: It measures the randomness of the memory accesses. An application with higher entropy can benefit from NMC because the cache hierarchy are ineffective for them.
+- **Spatial Locality**: They use the formula proposed by [X. Gu. et al.](https://dl.acm.org/doi/10.1145/1542431.1542446) for this purpose.
+- **DLP**: It measures the average possible vector length and is relevant for for NMC when employing SIMD processing units as near-data computation unit. It is derived from ILP score per opcode such as load, store, etc. This metric represent the number of instructions with the same opcode that could run in parallel, thus expressing the DLP per opcode.
+- **Basic block level Parallelism**: A basic block is the smallest component in the LLVM intermediate representation that can be parallelized. If an application jas high block-level parallelism, it can benefit from multiple processing units.
+
+They use an open source software analysis tool with the above-listed metrics to analyze multi-thread applications from NMC perspective.
+
+Then, a compilation process and programming model.
