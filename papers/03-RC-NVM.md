@@ -29,7 +29,6 @@ A new NVM architecture for enabling row-based and column-based accesses while pr
 
 
 ## Comment
-- I feel their evaluation is in a way to show off with big improvement numbers!
 
 ## New Ideas?
 
