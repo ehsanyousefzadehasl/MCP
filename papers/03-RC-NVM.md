@@ -1,6 +1,8 @@
 # RC-NVM: Enabling Symmetric Row and Column Memory Accesses for In-Memory Databases
 [Reference](https://ieeexplore.ieee.org/document/8327034)
 
+HPCA - 2018
+
 ## What is the problem the paper is trying to solve?
 DRAM memory systems are suitable for row-based actions like operation from OLTP system, but OLAP systems because of the scanning operation they perform and their strided accesses can result in significant performance degradation.
 
