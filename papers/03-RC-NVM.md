@@ -4,13 +4,13 @@
 HPCA - 2018
 
 ## What is the problem the paper is trying to solve?
-DRAM memory systems are suitable for row-based actions like operation from OLTP system, but OLAP systems because of the scanning operation they perform and their strided accesses can result in significant performance degradation.
+DRAM memory systems are suitable for row-based actions like operation from OLTP (**O**n**L**ine **T**ransactional **P**rocessing) system, but OLAP (**O**n**L**ine **A**nalytical **P**rocessing) systems because of the scanning operations they perform, and their strided accesses can result in significant performance degradation becasue caches cannot catch all accesses.
 
 ## What are the key ideas of the paper? Key insights?
-Finding that crossbar-based non-volatile memory (NVM) technologies, such as 3D XPoint, RRAM, and PCM, are promissing alternatives to support both row-oriented and column-oriented accesses with much lower area overhead, the authors design Row-Column-NVM (RC-NVM) that leverages the layout symmetry of crossbar-based NVM to enable fexible and efficient row and column accesses for IMDBs.
+Finding that crossbar-based non-volatile memory (NVM) technologies, such as **3D XPoint**, RRAM, and PCM, are promissing alternatives to support both row-oriented and column-oriented accesses with much lower area overhead, the authors design Row-Column-NVM (RC-NVM) that leverages the layout symmetry of crossbar-based NVM to enable fexible and efficient row and column accesses for IMDBs.
 
 ## The solution
-A new NVM architecture for enabling row-based and column-based accesses while providing a simple addressing model with some changes to cache architecture for addressing data synonym and coherency issues. Employing group caching for mitigating the bad effect of accesses with a specific order, also cache pinning to solve the thrashing problem. 
+A new NVM architecture for enabling row-based and column-based accesses while providing a simple addressing model with some changes to cache architecture for addressing data synonym and coherency issues. Employing group caching for mitigating the bad effect of accesses with a specific order, which data spans for more than one column, also cache pinning to solve the thrashing problem. 
 
 ## Results
 - In best case, 14.5X memory access performance improvement compared to conventional NVM (RRAM)
@@ -21,7 +21,6 @@ A new NVM architecture for enabling row-based and column-based accesses while pr
 - Considering coherence issue, when both row and column buffer ins the same bank are in use, by not allowing the row and column buffer to be active at the same time. If a row-column operation switch occurs, RC-NVM will close the active buffer and flush the data back, before it activates the new buffer.
 - Simple dual addressing addressing model
 - Considering the data synonym problem with a simple mechanism
-- 
 
 ## Weaknesses
 - They show area overheads of RC-NVM and DRAM, but when it comes to latency, they just mention their own laterncy overhead which is about 15% and it is because of cell access and writing delay!
