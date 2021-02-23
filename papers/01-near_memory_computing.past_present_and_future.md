@@ -19,7 +19,7 @@ NVM (Non-Volatile Memories) sometimes are termed as SCM (Storage Class Memories)
 There were some work on in-disk computation, but because of its negligible performance imporvement, it is not considered serious.
 
 ## Background
-First Near-Memory computing system was developed in 1990: Vector IRAM (VIRAM), a vector processor with a on-chip embedded DRAM to exploit data parallelism in multimedia applications. Although the performance obtained with this system was obtained, they did not pervail because of technological limits (the amount of the on-chip memory that could be integrated with the vector processor was limited due to the difference in logic and memory technology processes.). However, nowadays has changed completely.
+First Near-Memory computing system appeared in 1990: Vector IRAM (VIRAM), a vector processor with a on-chip embedded DRAM to exploit data parallelism for multimedia applications. Although the performance obtained with this system was obtained, it did not pervail because of technological limits (**the amount of the on-chip memory that could be integrated with the vector processor was limited due to the difference in logic and memory technology processes.**). However, nowadays everything (**1.** technology allows integration of logic and memory **2.** conventional systems performance is degraded because of data movement between the memory and the processor **3.** Now is the era of data-intensive application) has changed completely, so these systems are considered again.
 
 ## Processing Near Main Memory
 - Programmable Unit (CPU, GPU)
@@ -31,13 +31,15 @@ First Near-Memory computing system was developed in 1990: Vector IRAM (VIRAM), a
 - Programmable Unit (CPU, GPU)
 - Fixed-Function Unit (ASIC)
 - Reconfigurable Unit (FPGA)
-- 
+
+
 ## Challenges of Near-Memory Computing
-- virtual memory support
-  - software or hardware (hardware can be optimal instead of OS)
-- Cache Coherence (which the architect's choice on this matter is going to influence the performance drastically)
+- Virtual Memory Support
+  - This can be achieved by (1) Paging (2) Direct Segmentation
+  - Paging can be implemented in a software or hardware mechanism (hardware can be more efficient instead of OS)
+- Cache Coherence (which the architect's choice on this matter is going to influence the total performance dramatically)
   - Restricted region: dividing the memory into two parts: one for host processor (cachable), and another for the accelerator that is uncachable, or just caching in one block of the LLC to invalidate or write-back on the monitoring.
-  - Non-restricted region: leading to a significant amount of memory traffic. A work proposed keeping a memory coherent between a host GPU and near-memory compute units, flushing the L2.
+  - Non-restricted region: leading to a significant amount of memory traffic. A work proposed keeping a memory coherent between a host GPU and near-memory compute units, flushing the L2 cache in the main GPU after kernel execution.
   - My point here is that keeping the memory consistent and coherent lies in the realm of coherence and consistency for heterogeneous systems. 
 - Proramming Model
   - Compiler
@@ -70,7 +72,7 @@ Then, they characterize the application with the following metrics to detect the
 
 - **Memory Entropy**: It measures the randomness of the memory accesses. An application with higher entropy can benefit from NMC because the cache hierarchy are ineffective for them.
 - **Spatial Locality**: They use the formula proposed by [X. Gu. et al.](https://dl.acm.org/doi/10.1145/1542431.1542446) for this purpose.
-- **DLP**: It measures the average possible vector length and is relevant for for NMC when employing SIMD processing units as near-data computation unit. It is derived from ILP score per opcode such as load, store, etc. This metric represent the number of instructions with the same opcode that could run in parallel, thus expressing the DLP per opcode.
+- **DLP**: It measures the average possible vector length and is relevant for NMC when employing SIMD processing units as near-data computation unit. It is derived from ILP score per opcode such as load, store, etc. This metric represents the number of instructions with the same opcode that could run in parallel, thus expressing the DLP per opcode.
 - **Basic block level Parallelism**: A basic block is the smallest component in the LLVM intermediate representation that can be parallelized. If an application jas high block-level parallelism, it can benefit from multiple processing units.
 
 They use an open source software analysis tool with the above-listed metrics to analyze multi-thread applications from NMC perspective.
