@@ -241,4 +241,4 @@ As a rule of thumb, you can begin with using ReLU function and then move over to
 What to learn next? -> back-propagation
 ---
 
-- 
+I have to learn more about neural networks and machine learning

@@ -1,6 +1,6 @@
 # Near Memory Computing
 ## Introduction
-Nowadays, The technology trend is toward memory-centric chip technologies promising to solve the bandwidth bottleneck issues in today's systems. The idea behind these technologies is to bring the memory closer to the processing units to speed up the system. 
+Nowadays, The technology trend is toward memory-centric chip technologies promising to solve the bandwidth bottleneck issues in today's systems. The idea behind these technologies is to bring the memory closer to the processing units or vice versa improve the data access latency.
 
 Memory-centric is a broad term which can be dived in with two concepts:
 - **In-Memory Computing**: Bringing the processing tasks near or inside the memory.
