@@ -8,8 +8,8 @@ ISCA - 2020
 ## What is the problem the paper is trying to solve?
 Image processing workloads have high memory bandwidth demand:
 - Software view:
-  1. low arithmetic density
-  2. difficulty of pipeline fusion because of wide and heterogeneous pipelines
+  1. Low arithmetic density (operations per byte)
+  2. Difficulty of pipeline fusion because of wide and heterogeneous pipelines
 - Hardware view:
   - On-chip cache cannot hold all intermediate data in these applications
 
@@ -93,3 +93,7 @@ Typical goals of image pipeline:
 [Link1 that should be considered](https://www.youtube.com/watch?v=mANUEfTyH3g&list=PLZ9qNFMHZ-A79y1StvUUqgyL-O0fZh2rs&index=2)
 
 [Link2 that should be considered too](https://www.youtube.com/watch?v=PPLop4L2eGk&list=PLLssT5z_DsK-h9vYZkQkYNWcItqhlRJLN)
+
+### True/ Anti/ Output data dependencies
+
+![data dependencies](../img/data_dependencies.PNG)
