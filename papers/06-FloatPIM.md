@@ -17,25 +17,25 @@ Fully-digital (no ADC/DAC) scalable PIM architecture accelerating CNN in both tr
 ## The solution
 ![Float PIM](../img/digital_PIM.png)
 
-A digital and scalable processing in-memory architecture accelerating CNNsin both training and testing phases with precise floating-point computations. This architecture consists of multiple crossbar memory blocks to which layers of neural network are mapped.
+A digital and scalable processing in-memory architecture accelerating CNNs in both training and testing phases with precise floating-point computations. This architecture consists of multiple crossbar **memory blocks to which layers of neural network are mapped**.
 
-Each memory block represents a layer , and stores the data used in either testing (weights) or training (weights, the output of each neuron before activation, and the derivative of the activation function)
+**Each memory block represents a layer , and stores the data used in either testing (weights) or training (weights, the output of each neuron before activation, and the derivative of the activation function).**
 
 With the stored data, the Float-PIM performs with two phases:
-1. **Computing phase**: All memory blocks work in parallel, where each block processes an individual layer using PIM operations.
-2. **Data transfer phase**: The memory blocks transfer their outputs to the blocks corresponding to the next layers to proceed either the feed-forward or back-propagation.
+1. **Computing phase**: All memory blocks work in parallel, where each block processes **an individual layer** using PIM operations.
+2. **Data transfer phase**: The memory blocks **transfer their outputs to the blocks corresponding to the next layers to proceed either the feed-forward or back-propagation**.
 
-Each memory block supports in-memory operations for key CNN computations, including vector-matrix multiplication, convolution, and pooling.
+Each memory block supports in-memory operations for key CNN computations, including **vector-matrix multiplication**, **convolution**, and **pooling**.
 
-FloatPIM architecture consists of 32 tiles where each tile has 256 crossbar memory blocks having row and column drivers. In each block, barrel shifters are exploited for supporting the convolution kernel. In both feed-forward and back-propagation switches are used to transfer data to neighboring blocks in parallel. There is a controller in each tile to calculate the loss function and control the row-driver, and column-driver, and switches for fast data transfer as follows.
+FloatPIM architecture consists of 32 tiles where each tile has 256 crossbar memory blocks having **row and column drivers**. In each block, barrel shifters are exploited for supporting the convolution kernel. In both feed-forward and back-propagation switches are used to transfer data to neighboring blocks in parallel. There is a controller in each tile to calculate the loss function and control the row-driver, and column-driver, and switches for fast data transfer as follows.
 
 ![FloatPIM_architecture](../img/FloatPIM_architecture.png)
 
-Activation functions like sigmoid and ReLU are supported in memory. These function are performed with a sequence of in-memory NOR operations due to the structure of digital NVM PIM architecture (e.g., performing ReLU function by subtracting all neuron's output from the ReLU threhold value (THR), using Taylor; sigmoid using the PIM-based multiplication and addition based on Taylor expansion - This expansion is implemented in memory as a series of control signals).
+Activation functions like sigmoid and ReLU are supported in memory. **These function are performed with a sequence of in-memory NOR operations due to the structure of digital NVM PIM architecture** (e.g., performing ReLU function by subtracting all neuron's output from the ReLU threhold value (THR), using **Taylor**; sigmoid using the PIM-based multiplication and addition based on Taylor expansion - This expansion is implemented in memory as a series of control signals).
 
-Since FloatPIM does not use separate hardware modules for any layers but implements them using basic memory operations. Hence, with no changes to memory and minimal modifications to the architecture, FloatPIM can support the fusion of multiple layers.
+FloatPIM does not use separate hardware modules for any layers but implements them using basic memory operations. Hence, with no changes to memory and minimal modifications to the architecture, FloatPIM can support the fusion of multiple layers.
 
-Min/Max pooling operations (aiming at finding a maximum (minimum) values among the neuron's output in the previous layer) are implemented using in-memory search operations (using a crossbar memory with the capability of searching for the nearest value expoliting different supply voltages to give weight to different bitlines and enable the nearest search capability).
+Min/Max pooling operations (aiming at finding a maximum (minimum) values among the neuron's output in the previous layer) are implemented using **in-memory search operations** (using a crossbar memory with the capability of searching for the nearest value expoliting different supply voltages to give weight to different bitlines and enable the nearest search capability).
 
 Additionally, FloatPIM provides hardwares for widely used operations like convolution kernel shiftings (by replacing the convolution with light-weight interconnect logic for the multiplication logic -> which in fact is a barrel shifter connecting two parts of the same memory) to gain high performance.
 
@@ -44,6 +44,7 @@ The feed-forward is fully performed inside memory by executing the basic PIM ope
 Furthermore, FloatPIM furhter accelerates the feed-forward and back-propagation by utilizing the parallelism of row/block-parallel PIM operations, considering that tasks can be parallelized for both feed-forward and back-propagation across a batch. It uses multiple data copies pre-stored in different blocks in memory.
 
 For floating-point multiplication, sign bits are XORed, then exponent bits are added with multiple NOR operation, and multiplying mantissa bits from a previous work. Because of the sequentially of these operation, they are parallelized over all rows in the memory.
+
 ---
 
 
@@ -57,6 +58,8 @@ For floating-point multiplication, sign bits are XORed, then exponent bits are a
 - Both training and testing are accelerated
 
 ## Weaknesses
+- Implementing some functionalities are peformed by inside PIM NOR operations.
+
 
 ## Comment
 
@@ -81,7 +84,6 @@ For floating-point multiplication, sign bits are XORed, then exponent bits are a
 
  A neural network is **a very powerful machine learning mechanism** which basically mimics how a human brain learns.
 
-
 The brain receives the stimulus from the outside world, does the processing on the input, and then generates the output. As the task gets complicated, multiple neurons form a complex network, passing information among themselves.
 
 ![a neuron](../img/neuron.jpg)
@@ -100,7 +102,7 @@ An Artificial Neural Network tries to mimic the behaviour of human behaviour. Th
 
 Finally, the output from the activation functions moves to the next hidden layer and the same process is repeated. This forward movement of information is known as the **Forward Propagation** or **Feed Forward**.
 
-In addition, using the output of the forward propagation, error is calculated. Based on the error value, the weights and biases of the neurons are updated. This process is called **Back Propagation**. 
+In addition, using the output of the forward propagation, **error is calculated. Based on the error value, the weights and biases of the neurons are updated**. This process is called **Back Propagation**. 
 
 **Note**: For more information on forward and back propagation [this link](https://www.analyticsvidhya.com/blog/2020/07/neural-networks-from-scratch-in-python-and-r/) is studied and summarized in the following after activation functions.
 
@@ -238,7 +240,25 @@ If we encounter a case of dead neurons in our networks the leaky ReLU function i
 - Always keep in mind that ReLU function should only be used in the hidden layers
 As a rule of thumb, you can begin with using ReLU function and then move over to other activation functions in case ReLU doesn’t provide with optimum results
 
-What to learn next? -> back-propagation
+### Back Propagation
+
+### Convolution
+
+### Pooling
+Pooling layer is used in CNNs to reduce the size of array, hence reducing the computation. In CNNs, convolution is used to extract features. then in pooling the size is reduced and as a result the amount of computation is reduced. The pooling and convolutional operations look like shifting a stencil over a matrix and finding the maximum in that stencil, the paper in-memory search operations and circuit shifters are designed for this purpose.
+
+In the following image, which is a screenshot from [here](https://www.youtube.com/watch?v=zfiSAzpy9NM), a CNN can be observed.
+
+![CNN](../img/CNN.png)
+
+The main idea behind CNN is feature extraction because the second part is same as a simple artificial neural network. By using the convolution, the features are extracted and also dimensions are reduced, which finally result in reduced computation.
+
+Benefits of Convolution:
+1. Connections sparsity reduces overfitting
+2. Convolution + pooling gives location invariant feature detection
+3. Parameter sharing
+
+### Taylor expansion
 ---
 
 I have to learn more about neural networks and machine learning
